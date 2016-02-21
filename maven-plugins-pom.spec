@@ -6,7 +6,7 @@
 
 Name:           %{?scl_prefix}%{pkg_name}
 Version:        23
-Release:        7.10%{?dist}
+Release:        7.11%{?dist}
 Summary:        Maven Plugins POM
 BuildArch:      noarch
 License:        ASL 2.0
@@ -14,8 +14,8 @@ URL:            http://maven.apache.org/plugins/
 Source:         http://repo.maven.apache.org/maven2/org/apache/maven/plugins/%{short_name}/%{version}/%{short_name}-%{version}-source-release.zip
 
 BuildRequires:  %{?scl_prefix_java_common}maven-local
-BuildRequires:  maven30-maven-parent
-BuildRequires:  maven30-maven-plugin-plugin
+BuildRequires:  %{?scl_prefix}maven-parent
+BuildRequires:  %{?scl_prefix}maven-plugin-plugin
 
 %description
 This package provides Maven Plugins parent POM used by different
@@ -23,20 +23,20 @@ Apache Maven plugins.
 
 %prep
 %setup -q -n %{short_name}-%{version}
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 # Enforcer plugin is used to ban plexus-component-api.
 %pom_remove_plugin :maven-enforcer-plugin
 %{?scl:EOF}
 
 %build
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 %mvn_build
 %{?scl:EOF}
 
 %install
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 %mvn_install
 %{?scl:EOF}
@@ -46,6 +46,9 @@ set -e -x
 %doc LICENSE NOTICE
 
 %changelog
+* Mon Jan 11 2016 Michal Srb <msrb@redhat.com> - 23-7.11
+- maven33 rebuild #2
+
 * Sat Jan 09 2016 Michal Srb <msrb@redhat.com> - 23-7.10
 - maven33 rebuild
 
