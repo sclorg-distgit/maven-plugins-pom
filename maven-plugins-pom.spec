@@ -6,14 +6,14 @@
 
 Name:           %{?scl_prefix}%{pkg_name}
 Version:        23
-Release:        7.11%{?dist}
+Release:        7.12%{?dist}
 Summary:        Maven Plugins POM
 BuildArch:      noarch
 License:        ASL 2.0
 URL:            http://maven.apache.org/plugins/
 Source:         http://repo.maven.apache.org/maven2/org/apache/maven/plugins/%{short_name}/%{version}/%{short_name}-%{version}-source-release.zip
 
-BuildRequires:  %{?scl_prefix_java_common}maven-local
+BuildRequires:  %{?scl_prefix}maven-local
 BuildRequires:  %{?scl_prefix}maven-parent
 BuildRequires:  %{?scl_prefix}maven-plugin-plugin
 
@@ -46,6 +46,9 @@ set -e -x
 %doc LICENSE NOTICE
 
 %changelog
+* Mon Feb 08 2016 Michal Srb <msrb@redhat.com> - 23-7.12
+- Fix BR on maven-local & co.
+
 * Mon Jan 11 2016 Michal Srb <msrb@redhat.com> - 23-7.11
 - maven33 rebuild #2
 
